@@ -3,6 +3,7 @@ from pathlib import Path
 import json
 import shutil
 import copy
+import re
 import markdown
 from model_quality_lab.engine import Lab
 
@@ -56,6 +57,8 @@ for chapter in chapters:
     file=ROOT/'docs'/f'{chapter}.md'
     if not file.exists():continue
     html=markdown.markdown(file.read_text(),extensions=['tables','fenced_code','toc'])
+    # The handbook has one document title; chapter headings are nested beneath it.
+    html=re.sub(r'<(/?)h([1-5])\b',lambda m:f'<{m[1]}h{int(m[2])+1}',html)
     for other in chapters:html=html.replace(f'href="{other}.md"',f'href="#chapter-{other.lower()}"')
     body.append(f'<section id="chapter-{chapter.lower()}">{html}</section>')
 nav=''.join(f'<a href="#chapter-{c.lower()}">{c.replace("_"," ").title()}</a>' for c in chapters)
@@ -63,4 +66,8 @@ nav=''.join(f'<a href="#chapter-{c.lower()}">{c.replace("_"," ").title()}</a>' f
 handbook=site/'handbook';handbook.mkdir(exist_ok=True)
 shutil.copy2(ROOT/'docs/index.html',handbook/'index.html')
 shutil.copytree(ROOT/'docs/illustrations',handbook/'illustrations',dirs_exist_ok=True)
+evidence_files=[f for f in sorted(OUT.iterdir()) if f.suffix=='.json']
+links=''.join(f'<li><a href="{f.name}">{f.name}</a></li>' for f in evidence_files)
+(OUT/'index.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recorded aggregate evidence</title></head><body><h1>Recorded aggregate evidence</h1><p>Measured learning experiments. Raw datasets and credentials are excluded.</p><ul>{links}</ul><a href="../">Back to the illustrated handbook</a></body></html>')
+shutil.copytree(OUT,handbook/'evidence',dirs_exist_ok=True)
 print(json.dumps({'recorded_scenarios':len(state['runs']),'trace_spans':len(traces),'public_dataset_experiments':len(public_mind),'handbook_chapters':len(body)}))

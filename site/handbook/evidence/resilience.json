@@ -1,0 +1,11 @@
+{
+  "test": "actual process crash after durable claim",
+  "consumer_exit_code": 77,
+  "accepted_before_crash": 1,
+  "pending_after_crash": 1,
+  "projected_after_restart": 1,
+  "duplicate_reaccepted": false,
+  "final_unique_predictions": 1,
+  "pending": 0,
+  "scope": "single-host SQLite/WAL; not a distributed availability measurement"
+}

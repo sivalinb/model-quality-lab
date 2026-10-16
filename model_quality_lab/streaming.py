@@ -45,7 +45,7 @@ class ClickHouseSink:
 
 
 def consume():
-    from confluent_kafka import Consumer
+    from confluent_kafka import Consumer, KafkaError
     runtime=Path(os.environ.get("MQL_RUNTIME", ".runtime"));configure(runtime)
     store=Store(runtime/'lab.sqlite3')
     sink=ClickHouseSink();sink.initialize()
@@ -56,7 +56,11 @@ def consume():
         while True:
             message=consumer.poll(1)
             if message is None:continue
-            if message.error():raise RuntimeError(str(message.error()))
+            if message.error():
+                # On a fresh lab broker the producer creates the topic on first send.
+                if message.error().code()==KafkaError.UNKNOWN_TOPIC_OR_PART:
+                    time.sleep(.2);continue
+                raise RuntimeError(str(message.error()))
             try:
                 envelope=TypeAdapter(Event).validate_json(message.value()).model_dump()
             except ValueError:

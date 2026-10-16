@@ -1,0 +1,140 @@
+{
+  "task": "vision-classification",
+  "dataset": "sklearn digits (UCI optical handwritten digits)",
+  "provenance": "real public image samples; controlled pixel occlusion; CPU inference",
+  "train_samples": 1257,
+  "test_samples": 540,
+  "split": "stratified seeded holdout; not temporal",
+  "baseline_accuracy": 0.9814814814814815,
+  "candidate_accuracy": 0.5074074074074074,
+  "accuracy_delta_ci": [
+    -0.5166666666666667,
+    -0.43333333333333335
+  ],
+  "baseline_log_loss": 0.10047827351944644,
+  "candidate_log_loss": 1.6178115378136577,
+  "confusion_matrix": [
+    [
+      19,
+      0,
+      32,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+    ],
+    [
+      0,
+      6,
+      45,
+      3,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      53,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      10,
+      45,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      4,
+      1,
+      9,
+      2,
+      35,
+      0,
+      0,
+      2,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      3,
+      13,
+      0,
+      39,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      20,
+      0,
+      0,
+      0,
+      32,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      17,
+      5,
+      0,
+      0,
+      0,
+      32,
+      0,
+      0
+    ],
+    [
+      2,
+      0,
+      37,
+      2,
+      0,
+      0,
+      0,
+      0,
+      11,
+      0
+    ],
+    [
+      0,
+      0,
+      20,
+      26,
+      0,
+      0,
+      0,
+      3,
+      3,
+      2
+    ]
+  ],
+  "duration_seconds": 0.016253874986432493,
+  "limitations": "Image holdout may share writers; per-image bootstrap is illustrative, not writer-independent evidence"
+}

@@ -18,7 +18,7 @@ def wait(fn,timeout=150):
         try:
             value=fn()
             if value:return value
-        except Exception as e:last=type(e).__name__
+        except Exception as e:last=f'{type(e).__name__}: {str(e)[:300]}'
         time.sleep(1)
     raise AssertionError(f'Timed out waiting for integration evidence; last error class {last}')
 
@@ -62,8 +62,9 @@ def main():
         wait(lambda:request('http://127.0.0.1:9096/api/v1/query?query=mql_experiments_total')['data']['result'])
         dashboard=request('http://127.0.0.1:3016/api/dashboards/uid/model-quality-lab')
         assert len(dashboard['dashboard']['panels'])>=8
-        wait(lambda:'model-quality-lab' in request('http://127.0.0.1:16696/api/services')['data'])
-        wait(lambda:request('http://127.0.0.1:16696/api/traces/'+r['trace_id'])['data'])
+        # Use Jaeger's documented v3 query contract, rather than its internal UI API.
+        wait(lambda:'model-quality-lab' in request('http://127.0.0.1:16696/api/v3/services')['services'])
+        wait(lambda:request('http://127.0.0.1:16696/api/v3/traces/'+r['trace_id'])['result']['resourceSpans'])
         print('Distributed path passed: HTTP → Kafka → WAL projection + ClickHouse FINAL; Prometheus, Grafana and OTLP/Jaeger verified.')
     else:print('Live HTTP path passed; native telemetry services can be checked separately.')
 
