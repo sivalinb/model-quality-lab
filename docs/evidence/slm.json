@@ -1,0 +1,174 @@
+{
+  "task": "slm-ranking",
+  "model": "investigator-qwen3:4b",
+  "attempted_cases": 6,
+  "valid_output_rate": 0.6666666666666666,
+  "ndcg_on_valid_cases": 0.7827324383928644,
+  "baseline_ndcg_on_same_valid_cases": 0.5722662065794719,
+  "decision": "INSUFFICIENT_EVIDENCE",
+  "cases": [
+    {
+      "ranked_ids": [
+        "A1-052",
+        "A1-074",
+        "A2-062",
+        "A2-083",
+        "A3-035",
+        "A3-059",
+        "A3-085",
+        "A0-001",
+        "A0-032",
+        "A0-047",
+        "A0-051",
+        "A0-064"
+      ],
+      "latency_ms": 3443.273333949037,
+      "prompt_tokens": 474,
+      "completion_tokens": 120,
+      "model": "investigator-qwen3:4b",
+      "provenance": "actual local Ollama inference",
+      "cost": "unmeasured local compute",
+      "metrics": {
+        "eligible": true,
+        "ndcg": 0.6309297535714575,
+        "mrr": 0.5,
+        "recall": 1.0
+      },
+      "valid": true,
+      "baseline_metrics": {
+        "eligible": true,
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "recall": 1.0
+      }
+    },
+    {
+      "valid": false,
+      "error": "SLM output must be a complete unique permutation of offered IDs",
+      "metrics": null,
+      "baseline_metrics": {
+        "eligible": true,
+        "ndcg": 0.31546487678572877,
+        "mrr": 0.125,
+        "recall": 1.0
+      }
+    },
+    {
+      "ranked_ids": [
+        "A3-072",
+        "A1-068",
+        "A0-066",
+        "A2-052",
+        "A2-084",
+        "A2-079",
+        "A2-008",
+        "A3-042",
+        "A0-044",
+        "A0-004",
+        "A1-005",
+        "A2-043"
+      ],
+      "latency_ms": 2159.3002919107676,
+      "prompt_tokens": 437,
+      "completion_tokens": 120,
+      "model": "investigator-qwen3:4b",
+      "provenance": "actual local Ollama inference",
+      "cost": "unmeasured local compute",
+      "metrics": {
+        "eligible": true,
+        "ndcg": 0.5,
+        "mrr": 0.3333333333333333,
+        "recall": 1.0
+      },
+      "valid": true,
+      "baseline_metrics": {
+        "eligible": true,
+        "ndcg": 0.0,
+        "mrr": 0.08333333333333333,
+        "recall": 0.0
+      }
+    },
+    {
+      "valid": false,
+      "error": "SLM output must be a complete unique permutation of offered IDs",
+      "metrics": null,
+      "baseline_metrics": {
+        "eligible": true,
+        "ndcg": 0.6309297535714575,
+        "mrr": 0.5,
+        "recall": 1.0
+      }
+    },
+    {
+      "ranked_ids": [
+        "A1-031",
+        "A2-022",
+        "A2-031",
+        "A2-059",
+        "A0-002",
+        "A0-004",
+        "A0-022",
+        "A0-058",
+        "A3-010",
+        "A3-052",
+        "A3-055",
+        "A3-062"
+      ],
+      "latency_ms": 2236.5935419220477,
+      "prompt_tokens": 473,
+      "completion_tokens": 120,
+      "model": "investigator-qwen3:4b",
+      "provenance": "actual local Ollama inference",
+      "cost": "unmeasured local compute",
+      "metrics": {
+        "eligible": true,
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "recall": 1.0
+      },
+      "valid": true,
+      "baseline_metrics": {
+        "eligible": true,
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "recall": 1.0
+      }
+    },
+    {
+      "ranked_ids": [
+        "A3-051",
+        "A3-013",
+        "A3-040",
+        "A3-062",
+        "A2-015",
+        "A2-018",
+        "A2-010",
+        "A0-000",
+        "A0-010",
+        "A1-043",
+        "A1-085",
+        "A1-079"
+      ],
+      "latency_ms": 2117.242499953136,
+      "prompt_tokens": 439,
+      "completion_tokens": 120,
+      "model": "investigator-qwen3:4b",
+      "provenance": "actual local Ollama inference",
+      "cost": "unmeasured local compute",
+      "metrics": {
+        "eligible": true,
+        "ndcg": 1.0,
+        "mrr": 1.0,
+        "recall": 1.0
+      },
+      "valid": true,
+      "baseline_metrics": {
+        "eligible": true,
+        "ndcg": 0.2890648263178879,
+        "mrr": 0.1,
+        "recall": 1.0
+      }
+    }
+  ],
+  "limitations": "Small smoke sample; invalid outputs reported separately; local inference cost unmeasured"
+}

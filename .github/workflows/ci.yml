@@ -1,0 +1,30 @@
+name: Validate learning platform
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  correctness:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ matrix.python }}"}
+      - run: pip install -e '.[dev]'
+      - run: python -m pytest
+      - run: python scripts/resilience.py
+      - run: python scripts/integration_smoke.py --in-process
+  distributed-stack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: docker compose up --build -d
+      - run: python scripts/integration_smoke.py --distributed
+      - if: always()
+        run: docker compose logs --tail=70
+      - if: always()
+        run: docker compose down -v

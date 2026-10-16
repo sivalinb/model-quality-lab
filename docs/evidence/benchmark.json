@@ -1,0 +1,13 @@
+{
+  "events": 10000,
+  "accept_batch_size": 10000,
+  "projection_transaction_batch_size": 250,
+  "accept_seconds": 0.0673356669722125,
+  "projection_seconds": 0.2164732499513775,
+  "accept_events_per_second": 148509.70443534353,
+  "project_events_per_second": 46195.08416049613,
+  "bytes_per_event_payload": 145,
+  "python": "3.12.14",
+  "system": "macOS-26.6.2-arm64-arm-64bit",
+  "scope": "bounded local WAL benchmark; warm filesystem; no model inference or network; not production capacity"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "news-ranker", "owner": "recommendation-platform", "task": "ranking",
+  "features": ["topic_affinity", "subtopic_affinity", "log_popularity", "history_depth", "title_overlap"],
+  "protected_slices": ["new", "returning"], "tolerance": 0.025,
+  "min_label_coverage": 0.8, "retention_days": 7
+}
