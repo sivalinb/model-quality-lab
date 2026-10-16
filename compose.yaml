@@ -25,6 +25,8 @@ services:
       clickhouse: {condition: service_healthy}
   kafka:
     image: apache/kafka:3.9.1
+    depends_on:
+      kafka-volume-init: {condition: service_completed_successfully}
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -46,6 +48,10 @@ services:
       interval: 5s
       timeout: 10s
       retries: 20
+  kafka-volume-init:
+    image: busybox:1.37
+    command: ["sh", "-c", "chown 1000:1000 /data"]
+    volumes: ["kafka-state:/data"]
   clickhouse:
     image: clickhouse/clickhouse-server:25.3
     ports: ["127.0.0.1:8127:8123"]
@@ -82,9 +88,8 @@ services:
     volumes: ["./observability/collector.yaml:/etc/otelcol/config.yaml:ro"]
     depends_on: [jaeger]
   jaeger:
-    image: jaegertracing/all-in-one:1.68.0
+    image: cr.jaegertracing.io/jaegertracing/jaeger:2.22.0
     ports: ["127.0.0.1:16696:16686"]
-    environment: {COLLECTOR_OTLP_ENABLED: "true"}
 volumes:
   lab-state:
   kafka-state:
